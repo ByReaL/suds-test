@@ -17,6 +17,7 @@
 """
 Provides XML I{document} classes.
 """
+from __future__ import absolute_import, print_function, division, unicode_literals
 
 from logging import getLogger
 from suds.sax.element import Element
@@ -44,7 +45,8 @@ class Document(Element):
         s = []
         s.append(self.DECL)
         s.append('\n')
-        s.append(self.root().str())
+        if self.root() is not None:
+            s.append(self.root().str())
         return ''.join(s)
 
     def plain(self):
@@ -54,7 +56,7 @@ class Document(Element):
         return ''.join(s)
 
     def __str__(self):
-        return unicode(self).encode('utf-8')
+        return self.str()
 
     def __unicode__(self):
         return self.str()

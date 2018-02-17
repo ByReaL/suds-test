@@ -18,12 +18,17 @@
 The I{sxbuiltin} module provides classes that represent
 XSD I{builtin} schema objects.
 """
+from __future__ import absolute_import, print_function, division, unicode_literals
 
 from logging import getLogger
 from suds.sax.date import *
 from suds.xsd.sxbase import XBuiltin
 import datetime as dt
 
+try:
+    unicode = unicode
+except NameError:
+    unicode = str
 
 log = getLogger(__name__)
 
@@ -74,7 +79,7 @@ class XBoolean(XBuiltin):
 
     def translate(self, value, topython=True):
         if topython:
-            if isinstance(value, basestring):
+            if isinstance(value, (str, unicode)):
                 return XBoolean.translation[0].get(value)
             else:
                 return None
@@ -92,7 +97,7 @@ class XInteger(XBuiltin):
 
     def translate(self, value, topython=True):
         if topython:
-            if isinstance(value, basestring) and len(value):
+            if isinstance(value, (str, unicode)) and len(value):
                 return int(value)
             else:
                 return None
@@ -110,7 +115,7 @@ class XLong(XBuiltin):
 
     def translate(self, value, topython=True):
         if topython:
-            if isinstance(value, basestring) and len(value):
+            if isinstance(value, (str, unicode)) and len(value):
                 return long(value)
             else:
                 return None
@@ -128,7 +133,7 @@ class XFloat(XBuiltin):
 
     def translate(self, value, topython=True):
         if topython:
-            if isinstance(value, basestring) and len(value):
+            if isinstance(value, (str, unicode)) and len(value):
                 return float(value)
             else:
                 return None
@@ -146,7 +151,7 @@ class XDate(XBuiltin):
 
     def translate(self, value, topython=True):
         if topython:
-            if isinstance(value, basestring) and len(value):
+            if isinstance(value, (str, unicode)) and len(value):
                 return Date(value).date
             else:
                 return None
@@ -164,7 +169,7 @@ class XTime(XBuiltin):
 
     def translate(self, value, topython=True):
         if topython:
-            if isinstance(value, basestring) and len(value):
+            if isinstance(value, (str, unicode)) and len(value):
                 return Time(value).time
             else:
                 return None
@@ -180,9 +185,9 @@ class XDateTime(XBuiltin):
     Represents an (xsd) xs:datetime builtin type.
     """
 
-    def translate(self, value, topython=True):	    
+    def translate(self, value, topython=True):
         if topython:
-            if isinstance(value, basestring) and len(value):
+            if isinstance(value, (str, unicode)) and len(value):
                 return DateTime(value).datetime
             else:
                 return None

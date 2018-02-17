@@ -21,9 +21,15 @@ is the denormalized, objectified and intelligent view of the schema.
 Most of the I{value-add} provided by the model is centered around
 tranparent referenced type resolution and targeted denormalization.
 """
+from __future__ import absolute_import, print_function, division, unicode_literals
 
 from logging import getLogger
 from suds.sax import Namespace, splitPrefix
+
+try:
+    unicode = unicode
+except NameError:
+    unicode = str
 
 log = getLogger(__name__)
 
@@ -70,8 +76,8 @@ def isqref(object):
     return (
         isinstance(object, tuple) and
         len(object) == 2 and
-        isinstance(object[0], basestring) and
-        isinstance(object[1], basestring))
+        isinstance(object[0], (str, unicode)) and
+        isinstance(object[1], (str, unicode)))
 
 
 class Filter:

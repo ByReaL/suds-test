@@ -18,6 +18,7 @@
 The I{resolver} module provides a collection of classes that
 provide wsdl/xsd named type resolution.
 """
+from __future__ import absolute_import, print_function, division, unicode_literals
 
 import re
 from logging import getLogger
@@ -25,6 +26,11 @@ from suds import Repr
 from suds.sax import splitPrefix, Namespace
 from suds.sudsobject import Object
 from suds.xsd.query import BlindQuery, qualify
+
+try:
+    unicode = unicode
+except NameError:
+    unicode = str
 
 log = getLogger(__name__)
 
@@ -47,7 +53,7 @@ class Resolver:
         """
         Get the definition object for the schema object by name.
         @param name: The name of a schema object.
-        @type name: basestring
+        @type name: (str, unicode)
         @param resolved: A flag indicating that the fully resolved type
             should be returned.
         @type resolved: boolean
@@ -96,7 +102,7 @@ class PathResolver(Resolver):
         Actually, the path separator is usually a (.) but can be redefined
         during contruction.
         @param path: A (.) separated path to a schema type.
-        @type path: basestring
+        @type path: (str, unicode)
         @param resolved: A flag indicating that the fully resolved type
             should be returned.
         @type resolved: boolean
@@ -351,7 +357,7 @@ class NodeResolver(TreeResolver):
         """
         Find an attribute type definition.
         @param name: An attribute name.
-        @type name: basestring
+        @type name: (str, unicode)
         @param resolved: A flag indicating that the fully resolved type should
             be returned.
         @type resolved: boolean
@@ -406,7 +412,7 @@ class GraphResolver(TreeResolver):
     def find(self, name, object, resolved=False, push=True):
         """
         @param name: The name of the object to be resolved.
-        @type name: basestring
+        @type name: (str, unicode)
         @param object: The name's value.
         @type object: (any|L{Object})
         @param resolved: A flag indicating that the fully resolved type

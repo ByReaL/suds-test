@@ -18,18 +18,30 @@
 The I{2nd generation} service proxy provides access to web services.
 See I{README.txt}
 """
+from __future__ import absolute_import, print_function, division, unicode_literals
+
+
+try:
+    from http.cookiejar import CookieJar
+except ImportError:
+    from cookielib import CookieJar
+
+try:
+    from urllib.parse import urljoin
+except ImportError:
+    from urlparse import urljoin
+from copy import deepcopy
 
 import suds
 import suds.metrics as metrics
-from cookielib import CookieJar
 from suds import *
 from suds.reader import DefinitionsReader
 from suds.transport import TransportError, Request
 from suds.transport.https import HttpAuthenticated
 from suds.servicedefinition import ServiceDefinition
 from suds import sudsobject
-from sudsobject import Factory as InstFactory
-from sudsobject import Object
+from suds.sudsobject import Factory as InstFactory
+from suds.sudsobject import Object
 from suds.resolver import PathResolver
 from suds.builder import Builder
 from suds.wsdl import Definitions
@@ -38,8 +50,6 @@ from suds.sax.document import Document
 from suds.sax.parser import Parser
 from suds.options import Options
 from suds.properties import Unskin
-from urlparse import urlparse
-from copy import deepcopy
 from suds.plugin import PluginContainer
 from logging import getLogger
 
@@ -186,10 +196,10 @@ class Client(object):
         clone.sd = self.sd
         clone.messages = dict(tx=None, rx=None)
         return clone
- 
+
     def __str__(self):
         return unicode(self)
-        
+
     def __unicode__(self):
         s = ['\n']
         build = suds.__build__.split()
@@ -739,7 +749,7 @@ class SimClient(SoapClient):
     def simulation(cls, kwargs):
         """ get whether loopback has been specified in the I{kwargs}. """
         return kwargs.has_key(SimClient.injkey)
-        
+
     def invoke(self, args, kwargs):
         """
         Send the required soap message to invoke the specified method

@@ -17,6 +17,7 @@
 #
 # sax encoding/decoding test.
 #
+from __future__ import absolute_import, print_function, division, unicode_literals
 
 from suds.sax.element import Element
 from suds.sax.parser import Parser
@@ -26,30 +27,30 @@ def basic():
     p = Parser()
     d = p.parse(string=xml)
     a = d.root()
-    print 'A(parsed)=\n%s' % a
+    print('A(parsed)=\n%s' % a)
     assert str(a) == xml
     b = Element('a')
     b.setText('Me &&amp; &lt;b>my</b> shadow\'s <i>dog</i> love to \'play\' and sing "la,la,la";')
-    print 'B(encoded)=\n%s' % b
+    print('B(encoded)=\n%s' % b)
     assert str(b) == xml
-    print 'A(text-decoded)=\n%s' % a.getText()
-    print 'B(text-decoded)=\n%s' % b.getText()
+    print('A(text-decoded)=\n%s' % a.getText())
+    print('B(text-decoded)=\n%s' % b.getText())
     assert a.getText() == b.getText()
-    print 'test pruning'
+    print('test pruning')
     j = Element('A')
     j.set('n', 1)
     j.append(Element('B'))
-    print j
+    print(j)
     j.prune()
-    print j
+    print(j)
 
 def cdata():
     xml = '<a><![CDATA[<b>This is my &amp;&lt;tag&gt;</b>]]></a>'
     p = Parser()
     d = p.parse(string=xml)
-    print d
+    print(d)
     a = d.root()
-    print a.getText()
+    print(a.getText())
 
 if __name__ == '__main__':
     #basic()

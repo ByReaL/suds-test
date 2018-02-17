@@ -17,14 +17,24 @@
 """
 Contains classes for basic HTTP transport implementations.
 """
+from __future__ import absolute_import, print_function, division, unicode_literals
 
-import urllib2 as u2
+try:
+    import urllib.request as u2
+except ImportError:
+    import urllib2 as u2
+try:
+    from urllib.error import HTTPError
+except ImportError:
+    from urllib2 import HTTPError
 import base64
 import socket
 from suds.transport import *
 from suds.properties import Unskin
-from urlparse import urlparse
-from cookielib import CookieJar
+try:
+    from http.cookiejar import CookieJar
+except ImportError:
+    from cookielib import CookieJar
 from logging import getLogger
 
 log = getLogger(__name__)
@@ -60,7 +70,7 @@ class HttpTransport(Transport):
             u2request = u2.Request(url)
             self.proxy = self.options.proxy
             return self.u2open(u2request)
-        except u2.HTTPError as e:
+        except HTTPError as e:
             raise TransportError(str(e), e.code, e.fp)
 
     def send(self, request):

@@ -17,8 +17,13 @@
 """
 Contains classes for basic HTTP (authenticated) transport implementations.
 """
+from __future__ import absolute_import, print_function, division, unicode_literals
 
-import urllib2 as u2
+try:
+    import urllib.request as u2
+except ImportError:
+    import urllib2 as u2
+
 from suds.transport.http import HttpTransport
 from logging import getLogger
 

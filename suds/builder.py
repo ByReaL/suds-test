@@ -17,10 +17,16 @@
 """
 The I{builder} module provides an wsdl/xsd defined types factory
 """
+from __future__ import absolute_import, print_function, division, unicode_literals
 
 from logging import getLogger
 from suds import TypeNotFound
 from suds.sudsobject import Factory
+
+try:
+    unicode = unicode
+except NameError:
+    unicode = str
 
 log = getLogger(__name__)
 
@@ -37,7 +43,7 @@ class Builder:
 
     def build(self, name):
         "build an object for the specified typename as defined in the schema"
-        if isinstance(name, basestring):
+        if isinstance(name, (str, unicode)):
             type = self.resolver.find(name)
             if type is None:
                 raise TypeNotFound(name)
@@ -107,7 +113,7 @@ class Builder:
             if x.choice():
                 return True
         return False
-    
+
     def ordering(self, type):
         """ get the ordering """
         result = []

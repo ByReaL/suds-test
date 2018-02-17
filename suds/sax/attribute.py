@@ -17,10 +17,16 @@
 """
 Provides XML I{attribute} classes.
 """
+from __future__ import absolute_import, print_function, division, unicode_literals
 
 from logging import getLogger
 from suds.sax import Namespace, splitPrefix
 from suds.sax.text import Text
+
+try:
+    unicode = unicode
+except NameError:
+    unicode = str
 
 log = getLogger(__name__)
 
@@ -31,18 +37,18 @@ class Attribute:
     @ivar parent: The node containing this attribute
     @type parent: L{element.Element}
     @ivar prefix: The I{optional} namespace prefix.
-    @type prefix: basestring
+    @type prefix: (str, unicode)
     @ivar name: The I{unqualified} name of the attribute
-    @type name: basestring
+    @type name: (str, unicode)
     @ivar value: The attribute's value
-    @type value: basestring
+    @type value: (str, unicode)
     """
     def __init__(self, name, value=None):
         """
         @param name: The attribute's name with I{optional} namespace prefix.
-        @type name: basestring
+        @type name: (str, unicode)
         @param value: The attribute's value
-        @type value: basestring
+        @type value: (str, unicode)
         """
         self.parent = None
         self.prefix, self.name = splitPrefix(name)
@@ -64,7 +70,7 @@ class Attribute:
         """
         Get the B{fully} qualified name of this attribute
         @return: The fully qualified name.
-        @rtype: basestring
+        @rtype: (str, unicode)
         """
         if self.prefix is None:
             return self.name
@@ -75,7 +81,7 @@ class Attribute:
         """
         Set the attributes value
         @param value: The new value (may be None)
-        @type value: basestring
+        @type value: (str, unicode)
         @return: self
         @rtype: L{Attribute}
         """
@@ -90,7 +96,7 @@ class Attribute:
         Get the attributes value with optional default.
         @param default: An optional value to be return when the
             attribute's has not been set.
-        @type default: basestring
+        @type default: (str, unicode)
         @return: The attribute's value, or I{default}
         @rtype: L{Text}
         """
@@ -124,7 +130,7 @@ class Attribute:
         """
         Resolve the specified prefix to a known namespace.
         @param prefix: A declared prefix
-        @type prefix: basestring
+        @type prefix: (str, unicode)
         @return: The namespace that has been mapped to I{prefix}
         @rtype: (I{prefix}, I{name})
         """
@@ -170,7 +176,7 @@ class Attribute:
     def __str__(self):
         """ get an xml string representation """
         return unicode(self).encode('utf-8')
-    
+
     def __unicode__(self):
         """ get an xml string representation """
         n = self.qname()

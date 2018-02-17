@@ -21,7 +21,7 @@ is the denormalized, objectified and intelligent view of the schema.
 Most of the I{value-add} provided by the model is centered around
 tranparent referenced type resolution and targeted denormalization.
 """
-
+from __future__ import absolute_import, print_function, division, unicode_literals
 
 import suds.metrics
 from suds import *
@@ -34,6 +34,11 @@ from suds.xsd.deplist import DepList
 from suds.sax.element import Element
 from suds.sax import splitPrefix, Namespace
 from logging import getLogger
+
+try:
+    unicode = unicode
+except NameError:
+    unicode = str
 
 log = getLogger(__name__)
 
@@ -195,7 +200,7 @@ class Schema:
         @param root: The xml root.
         @type root: L{sax.element.Element}
         @param baseurl: The base url used for importing.
-        @type baseurl: basestring
+        @type baseurl: (str, unicode)
         @param options: An options dictionary.
         @type options: L{options.Options}
         @param container: An optional container.

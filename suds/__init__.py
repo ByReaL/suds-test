@@ -18,9 +18,15 @@
 Suds is a lightweight SOAP python client that provides a
 service proxy for Web Services.
 """
+from __future__ import absolute_import, print_function, division, unicode_literals
 
 import os
 import sys
+
+try:
+    unicode = unicode
+except NameError:
+    unicode = str
 
 #
 # Project properties
@@ -78,7 +84,7 @@ class SoapHeadersNotPermitted(Exception):
 
     def __init__(self, name):
         Exception.__init__(self, self.msg % name)
-    
+
 class WebFault(Exception):
     def __init__(self, fault, document):
         if hasattr(fault, 'faultstring'):
@@ -105,7 +111,7 @@ class Repr:
 
 def tostr(object, encoding=None):
     """ get a unicode safe string representation of an object """
-    if isinstance(object, basestring):
+    if isinstance(object, (str, unicode)):
         if encoding is None:
             return object
         else:
@@ -113,7 +119,7 @@ def tostr(object, encoding=None):
     if isinstance(object, tuple):
         s = ['(']
         for item in object:
-            if isinstance(item, basestring):
+            if isinstance(item, (str, unicode)):
                 s.append(item)
             else:
                 s.append(tostr(item))
@@ -123,7 +129,7 @@ def tostr(object, encoding=None):
     if isinstance(object, list):
         s = ['[']
         for item in object:
-            if isinstance(item, basestring):
+            if isinstance(item, (str, unicode)):
                 s.append(item)
             else:
                 s.append(tostr(item))
@@ -133,12 +139,12 @@ def tostr(object, encoding=None):
     if isinstance(object, dict):
         s = ['{']
         for item in object.items():
-            if isinstance(item[0], basestring):
+            if isinstance(item[0], (str, unicode)):
                 s.append(item[0])
             else:
                 s.append(tostr(item[0]))
             s.append(' = ')
-            if isinstance(item[1], basestring):
+            if isinstance(item[1], (str, unicode)):
                 s.append(item[1])
             else:
                 s.append(tostr(item[1]))
@@ -157,9 +163,15 @@ class null:
     Used to pass NULL for optional XML nodes.
     """
     pass
-    
+
+class Object(object):
+    """
+    The python 3 base Object
+    """
+    pass
+
 def objid(obj):
     return obj.__class__.__name__ + ':' + hex(id(obj))
 
 
-import client
+import suds.client
