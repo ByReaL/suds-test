@@ -1,10 +1,22 @@
-Metadata-Version: 1.0
+Metadata-Version: 1.1
 Name: suds
-Version: 0.4
+Version: 1.4
 Summary: Lightweight SOAP client
-Home-page: https://fedorahosted.org/suds
-Author: Jeff Ortel
-Author-email: jortel@redhat.com
-License: UNKNOWN
-Description: UNKNOWN
-Platform: UNKNOWN
+Home-page: https://github.com/ByReaL/suds
+Author: Mircea Dan (Cackharot (original Jeff Ortel))
+Author-email: byrealmircea@yahoo.com
+License: LGPL
+Description: The "suds" is a lightweight soap-based client for python2 and python3 licensed under LGPL. This is a mirror of https://pypi.python.org/pypi/suds supporting python2 and http://svn.fedorahosted.org/svn/suds/trunk/ supporting Python3 and some fixes.
+Keywords: soap,wsdl,basic http binding,basic auth
+Platform: Python2, Python3
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)
+Classifier: Operating System :: OS Independent

@@ -1,6 +1,6 @@
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the (LGPL) GNU Lesser General Public License as
-# published by the Free Software Foundation; either version 3 of the 
+# published by the Free Software Foundation; either version 3 of the
 # License, or (at your option) any later version.
 #
 # This program is distributed in the hope that it will be useful,
@@ -20,7 +20,6 @@ Provides sx typing classes.
 
 from logging import getLogger
 from suds import *
-from suds.mx import *
 from suds.sax import Namespace as NS
 from suds.sax.text import Text
 
@@ -47,9 +46,9 @@ class Typer:
     @classmethod
     def auto(cls, node, value=None):
         """
-        Automatically set the node's xsi:type attribute based on either I{value}'s
-        class or the class of the node's text.  When I{value} is an unmapped class,
-        the default type (xs:any) is set.
+        Automatically set the node's xsi:type attribute based on either
+        I{value}'s class or the class of the node's text.  When I{value} is an
+        unmapped class, the default type (xs:any) is set.
         @param node: An XML node
         @type node: L{sax.element.Element}
         @param value: An object that is or would be the node's text.
@@ -92,9 +91,9 @@ class Typer:
             ns = cls.genprefix(node, ns)
             qname = ':'.join((ns[0], tval))
             node.set(xta, qname)
-            node.addPrefix(ns[0], ns[1]) 
+            node.addPrefix(ns[0], ns[1])
         return node
-    
+
     @classmethod
     def genprefix(cls, node, ns):
         """
@@ -111,7 +110,7 @@ class Typer:
             if u is None or u == ns[1]:
                 return (p, ns[1])
         raise Exception('auto prefix, exhausted')
-    
+
     @classmethod
     def known(cls, object):
         try:

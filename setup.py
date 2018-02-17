@@ -2,7 +2,7 @@
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the (LGPL) GNU Lesser General Public License as
-# published by the Free Software Foundation; either version 3 of the 
+# published by the Free Software Foundation; either version 3 of the
 # License, or (at your option) any later version.
 #
 # This program is distributed in the hope that it will be useful,
@@ -21,13 +21,31 @@ import suds
 from setuptools import setup, find_packages
 
 setup(
-    name="suds",
+    name='suds',
     version=suds.__version__,
     description="Lightweight SOAP client",
-    author="Jeff Ortel",
-    author_email="jortel@redhat.com",
-    maintainer="Jeff Ortel",
-    maintainer_email="jortel@redhat.com",
+    long_description="""The "suds" is a lightweight soap-based client for python2 and python3 licensed under LGPL. 
+	This is a mirror of https://pypi.python.org/pypi/suds supporting Python2 
+	and http://svn.fedorahosted.org/svn/suds/trunk/ supporting Python3 and some fixes.""",
+    author='Mircea Dan (Cackharot (original Jeff Ortel))',
+    author_email='byrealmircea@yahoo.com',
     packages=find_packages(exclude=['tests']),
-    url="https://fedorahosted.org/suds",
+    url='https://github.com/ByReaL/suds',
+    test_suite='tests',
+    license='LGPL',
+    keywords='soap, wsdl,basic http binding, basic auth',
+    platforms=['Python2', 'Python3'],
+    classifiers=[
+	    'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
+        'Operating System :: OS Independent',
+    ]
 )
