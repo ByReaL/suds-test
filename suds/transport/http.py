@@ -29,7 +29,7 @@ except ImportError:
     from urllib2 import HTTPError
 import base64
 import socket
-from suds.transport import *
+from suds.transport import Transport, TransportError, Reply
 from suds.properties import Unskin
 try:
     from http.cookiejar import CookieJar
@@ -88,7 +88,7 @@ class HttpTransport(Transport):
             self.getcookies(fp, u2request)
             result = Reply(200, fp.headers.dict, fp.read())
             log.debug('received:\n%s', result)
-        except u2.HTTPError as e:
+        except HTTPError as e:
             if e.code in (202, 204):
                 result = None
             else:

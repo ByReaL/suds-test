@@ -25,11 +25,6 @@ try:
     from http.cookiejar import CookieJar
 except ImportError:
     from cookielib import CookieJar
-
-try:
-    from urllib.parse import urljoin
-except ImportError:
-    from urlparse import urljoin
 from copy import deepcopy
 
 import suds

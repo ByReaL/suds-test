@@ -20,9 +20,13 @@ Contains classes for basic HTTP (authenticated) transport implementations.
 from __future__ import absolute_import, print_function, division, unicode_literals
 
 try:
-    import urllib.request as u2
+    from urllib.request import (
+        HTTPPasswordMgrWithDefaultRealm,
+        HTTPBasicAuthHandler)
 except ImportError:
-    import urllib2 as u2
+    from urllib2 import (
+        HTTPPasswordMgrWithDefaultRealm,
+        HTTPBasicAuthHandler)
 
 from suds.transport.http import HttpTransport
 from logging import getLogger
@@ -57,7 +61,7 @@ class HttpAuthenticated(HttpTransport):
                     - default: None
         """
         HttpTransport.__init__(self, **kwargs)
-        self.pm = u2.HTTPPasswordMgrWithDefaultRealm()
+        self.pm = HTTPPasswordMgrWithDefaultRealm()
 
     def open(self, request):
         self.addcredentials(request)
@@ -79,7 +83,7 @@ class HttpAuthenticated(HttpTransport):
 
     def u2handlers(self):
             handlers = HttpTransport.u2handlers(self)
-            handlers.append(u2.HTTPBasicAuthHandler(self.pm))
+            handlers.append(HTTPBasicAuthHandler(self.pm))
             return handlers
 
 

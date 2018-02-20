@@ -20,8 +20,7 @@ The I{query} module defines a class for performing schema queries.
 from __future__ import absolute_import, print_function, division, unicode_literals
 
 from logging import getLogger
-from suds import *
-from suds.sudsobject import *
+from suds import Object, Repr, objid, tostr
 from suds.xsd import qualify, isqref
 from suds.xsd.sxbuiltin import Factory
 

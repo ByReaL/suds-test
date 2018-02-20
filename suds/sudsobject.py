@@ -22,7 +22,9 @@ wsdl/xsd defined types.
 from __future__ import absolute_import, print_function, division, unicode_literals
 
 from logging import getLogger
-from suds import *
+
+from suds import tostr
+from suds.utils import is_builtin
 
 try:
     unicode = unicode
@@ -142,17 +144,14 @@ class Object:
         self.__metadata__ = Metadata()
 
     def __setattr__(self, name, value):
-        builtin =  name.startswith('__') and name.endswith('__')
-        if not builtin and \
-            name not in self.__keylist__:
+        if not is_builtin(name) and name not in self.__keylist__:
             self.__keylist__.append(name)
         self.__dict__[name] = value
 
     def __delattr__(self, name):
         try:
             del self.__dict__[name]
-            builtin =  name.startswith('__') and name.endswith('__')
-            if not builtin:
+            if not is_builtin(name):
                 self.__keylist__.remove(name)
         except:
             cls = self.__class__.__name__

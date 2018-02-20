@@ -20,6 +20,7 @@ Properties classes.
 from __future__ import absolute_import, print_function, division, unicode_literals
 
 from logging import getLogger
+from suds.utils import is_builtin
 
 log = getLogger(__name__)
 
@@ -467,8 +468,7 @@ class Skin(object):
         self.__pts__ = Properties(domain, definitions, kwargs)
 
     def __setattr__(self, name, value):
-        builtin = name.startswith('__') and name.endswith('__')
-        if builtin:
+        if is_builtin(name):
             self.__dict__[name] = value
             return
         self.__pts__.set(name, value)

@@ -23,13 +23,10 @@ tranparent referenced type resolution and targeted denormalization.
 """
 from __future__ import absolute_import, print_function, division, unicode_literals
 
-import suds.metrics
-from suds import *
-from suds.xsd import *
-from suds.xsd.sxbuiltin import *
+from suds import objid, Repr
+from suds.xsd import isqref
+from suds.xsd.sxbuiltin import Factory
 from suds.xsd.sxbasic import Factory as BasicFactory
-from suds.xsd.sxbuiltin import Factory as BuiltinFactory
-from suds.xsd.sxbase import SchemaObject
 from suds.xsd.deplist import DepList
 from suds.sax.element import Element
 from suds.sax import splitPrefix, Namespace

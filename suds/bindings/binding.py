@@ -540,4 +540,3 @@ class PartElement(SchemaElement):
             return self
         else:
             return self.__resolved
-    

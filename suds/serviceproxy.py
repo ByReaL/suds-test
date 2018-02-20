@@ -22,8 +22,10 @@ Replaced by: L{client.Client}
 from __future__ import absolute_import, print_function, division, unicode_literals
 
 from logging import getLogger
+
 from suds import *
 from suds.client import Client
+from suds.utils import is_builtin
 
 log = getLogger(__name__)
 
@@ -81,8 +83,7 @@ class ServiceProxy(object):
         return unicode(self.__client__)
 
     def __getattr__(self, name):
-        builtin =  name.startswith('__') and name.endswith('__')
-        if builtin:
+        if is_builtin(name):
             return self.__dict__[name]
         else:
             return getattr(self.__client__.service, name)
